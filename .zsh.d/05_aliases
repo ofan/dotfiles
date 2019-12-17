@@ -1,0 +1,64 @@
+#!/bin/zsh
+
+# command aliases
+## vim simulation
+if [ -n "$OS_UNIX" ];then
+    alias ls="ls -G -F"
+else
+    alias ls="ls -F --color=always"
+fi
+alias ':q'=exit							#vimlike :)
+alias 'x'=exit		
+alias 'q'=exit		
+alias lsa='ls -ahF'
+alias lsl='ls -lhF'
+alias lsal='lsa -l'
+alias lsla='lsal'
+alias lla='lsa -l'
+alias llh='ls -lh'
+#alias a='sudo apt-get'	#fast access apt-get
+#alias s='apt-cache search'    #fast cache search
+alias xc='nyxmms2'
+alias lsls="lsl -S"
+alias n="notify"
+alias idf=gnomevfs-info
+alias '..'='cd ..'
+alias '....'='cd ../..'
+alias '~'='cd ~'
+alias sshproxy='ssh -CfNg ofan@shell.cjb.net 127.0.0.1:1080'
+alias cls=clear
+alias 'gbk2utf8'='iconv -fgbk -tutf8'
+alias g2u=gbk2utf8
+alias du='du -h'
+alias df='df -h'
+alias echoe='echo -e'
+alias y=yaourt
+alias n=notify
+alias hex='od -Ax -tx1z -v'
+alias 'gentag'='ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .'
+alias b='sudo bauerbill'
+alias ba='b --aur'
+alias bau='ba -Syu'
+alias bas='ba -Ss'
+alias bai='ba -S'
+alias baq='ba -Qsi'
+alias bal='ba -Ql'
+alias bao='ba -Qo'
+alias bar='ba -R'
+alias rot13="tr a-zA-Z n-za-mN-ZA-M"
+alias c='clyde'
+alias mutt="COLORFGBG='15;color233' mutt"
+alias slrn="slrn -n"
+alias man='LC_ALL=C LANG=C man'
+alias f=finger
+alias ll='ls -alh'
+#alias ls='ls --color=auto '
+alias offlineimap-tty='offlineimap -u TTY.TTYUI'
+alias rest2html-css='rst2html --embed-stylesheet --stylesheet-path=/usr/share/python-docutils/s5_html/themes/default/print.css'
+alias g=git
+alias less='less -R'
+alias irc='weechat'
+if [ -n "$OS_MAC" ];then
+	alias vim="mac_clipboard_reattach `which vim`"
+fi
+alias ':e'=vim

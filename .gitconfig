@@ -1,0 +1,41 @@
+[core]
+    editor=vim
+    quotepath = false
+    askpass = 1
+    autocrlf = false
+    safecrlf = true
+    eol = lf
+[alias]
+    st=status --untracked-files=no -s
+    sts=status -s
+    df=diff
+    cm=commit
+    cmm= "!f() { msg=$1;shift;git commit \"$@\" -m $msg; }; f"
+    cmma=commit -a -m
+    graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
+    br=branch
+    co=checkout
+    lg=log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    rem = remote
+    gf = diff
+    sm = submodule
+    alias = config --get-regexp 'alias.*'
+[color]
+    ui = auto
+    status = auto
+    branch = auto
+    interactive = auto
+[commit]
+    template="~/.commit-template"
+
+[encrypt]
+    patternFile="./.gitcrypt"
+
+[filter "encrypted"]
+    smudge="_GIT_FILENAME='%f' ~/bin/_git_crypt_filter smudge"
+    clean="_GIT_FILENAME='%f' ~/bin/_git_crypt_filter clean"
+
+[diff "encrypted"]
+    textconv="_GIT_FILENAME='%f' ~/bin/_git_crypt_filter diff"
+[push]
+    default = simple

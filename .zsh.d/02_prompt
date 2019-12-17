@@ -1,0 +1,16 @@
+# vim: set ft=zsh :
+PS_SSH=''
+if [ -n "$SSH_CLIENT" ]; then
+    # Login from a remote machine
+    PS_SSH="SSH@[`echo $SSH_CLIENT | cut -d' ' -f1`]"
+fi
+
+if [ "$OS_CYGWIN" != "1" ];then
+    PS_VCS="[$PR_GREEN%U\$vcs_info_msg_0_%u$PR_NO_COLOR]"
+fi
+
+#PS1="$PR_LIGHT_WHITE%n$PR_MAGENTA@${PS_SSH}${PR_NO_COLOR}[$PR_GREEN%U\$vcs_info_msg_0_%u$PR_NO_COLOR]#$PR_RED%3c$PR_NO_COLOR %(!.#.$) "
+PS1="$PR_LIGHT_WHITE%n$PR_MAGENTA@%m${PR_NO_COLOR}$PS_VCS#$PR_RED%3c$PR_NO_COLOR %(!.#.$) "
+#PS1="$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I") $PWD)[$PR_BLUE%n$PR_NO_COLOR:$PR_MAGENTA%c$PR_NO_COLOR]%(!.#.$) "
+RPS1="${PR_MAGENTA}${PS_SSH}${PR_NO_COLOR} ${PR_GREEN}%t$PR_NO_COLOR"
+#RPS1="$PR_LIGHT_YELLOW(%D{%m-%d %H:%M})$PR_NO_COLOR"

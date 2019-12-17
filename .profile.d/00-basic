@@ -1,0 +1,51 @@
+#!/bin/bash
+# Determine OS platform
+case "`uname`" in
+    Unix)
+        export OS_UNIX=1
+        ;;
+    Linux)
+        export OS_LINUX=1
+        ;;
+    Darwin)
+        export OS_MAC=1
+        export OS_UNIX=1
+        ;;
+    CYGWIN*)
+        export OS_CYGWIN=1
+	;;
+esac
+
+SHELL_LOGIN=0
+SHELL_INTERACTIVE=0
+
+SHELL_FLAG=${0:0:1}
+# Determing if login shell
+if [ "x$SHELL_FLAG" = "x-" ];then
+    export SHELL_LOGIN=1
+fi
+
+# Determine if interactive shell
+if [ "x$SHELL_FLAG" = "xi" ];then
+    export SHELL_INTERACTIVE=1
+fi
+
+if [ $SHELL_LOGIN -eq 1 -a -x /usr/libexec/path_helper ]; then
+	eval `/usr/libexec/path_helper -s`
+fi
+
+if [[ -n "$OS_MAC" ]];
+then
+    PATH="/opt/local/bin:$PATH"
+fi
+
+if [[ -n "$OS_LINUX" ]]; then
+    export NO_DOC_UPDATE=1
+    PATH="~/.cabal/bin:$PATH"
+    export PATH
+fi
+
+if [[ ( -n "$OS_MAC" || -n "$OS_LINUX" || -n "$OS_CYGWIN" ) && ( -z "`echo $PATH | grep $HOME/bin`" ) ]];then
+    PATH="$HOME/bin:$PATH"
+    export PATH
+fi
