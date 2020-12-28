@@ -39,6 +39,3 @@
     textconv="_GIT_FILENAME='%f' ~/bin/_git_crypt_filter diff"
 [push]
     default = simple
-[user]
-	email = 319679+ofan@users.noreply.github.com
-	name = ofan
