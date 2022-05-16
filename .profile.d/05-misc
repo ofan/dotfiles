@@ -1,0 +1,7 @@
+# Pager
+export PAGER=less
+# ls colors
+export LSCOLORS=Gxfxcxdxbxegedabagacad
+# Default editor
+export EDITOR=vim
+

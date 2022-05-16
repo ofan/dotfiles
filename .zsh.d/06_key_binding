@@ -1,0 +1,9 @@
+#!/bin/zsh
+bindkey "" backward-delete-char
+bindkey '' beginning-of-line
+bindkey '' end-of-line
+bindkey 'OA' up-line-or-history
+bindkey 'OB' down-line-or-history
+bindkey "" history-incremental-search-backward
+#bindkey ' ' magic-space    # also do history expansion on space
+bindkey '^I' complete-word # complete on tab, leave expansion to _expand

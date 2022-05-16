@@ -1,0 +1,39 @@
+#!/bin/zsh
+if [ $SSH_TTY ]; then
+  MUTT_EDITOR=vim
+else
+  MUTT_EDITOR=emacsc
+fi
+
+function tmuxWinTitleVar(){
+    if [ -n "$TMUX" ]; then
+        export TMUX_WINDOW_TITLE=`tmux display-message -p '#W'`
+    fi
+}
+
+PreCmds=()
+function registerPreCmd() {
+    PreCmds[(($#PreCmds + 1))]=$1
+    export PreCmds
+}
+
+PreExecs=()
+function registerPreExec(){
+    PreExecs[(($#PreExecs + 1))]=$1
+    export PreExecs
+}
+
+function precmd() {
+    for cmd in $PreCmds; do
+        $cmd &> /dev/null
+    done
+}
+
+fuction preexec() {
+    for cmd in $PreExecs; do
+        $cmd &> /dev/null
+    done
+}
+
+# automatically save the current window title to $TMUX_WINDOW_TITLE before executing each command
+registerPreExec tmuxWinTitleVar
