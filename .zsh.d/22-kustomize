@@ -1,0 +1,5 @@
+# vim: set ft=zsh:
+return
+if type kustomize &> /dev/null; then
+    source <(kustomize completion zsh)
+fi

@@ -101,3 +101,7 @@ _start_tmux(){
 }
 
 _start_tmux
+
+autoload -Uz compinit; compinit
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /home/ubuntu/bin/mc mc

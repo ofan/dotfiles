@@ -68,3 +68,5 @@ fi
 complete -o filenames -F _root_command notify
 complete -o filenames -F _root_command n
 
+
+complete -C /home/ubuntu/bin/mc mc

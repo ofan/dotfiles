@@ -37,3 +37,5 @@ alias bao='ba -Qo'
 alias bar='ba -R'
 alias rot13="tr a-zA-Z n-za-mN-ZA-M"
 alias c='clyde'
+alias ktl='kubectl'
+alias k='kubectl'
