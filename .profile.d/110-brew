@@ -1,3 +1,7 @@
-if type brew &> /dev/null;then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# vim: set ft=bash:
+
+_BREW_BIN=/home/linuxbrew/.linuxbrew/bin
+if [[ -d "$_BREW_BIN" &&  ":$PATH:" != *":$_BREW_BIN:"* ]];then
+    export PATH=$PATH:$_BREW_BIN
 fi
+unset _BREW_BIN

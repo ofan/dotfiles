@@ -1,0 +1,2 @@
+# vim: set ft=zsh:
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
