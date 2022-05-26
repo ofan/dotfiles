@@ -1,5 +1,0 @@
-# vim: set ft=zsh:
-return
-if type podman &> /dev/null; then
-    source <(podman completion zsh)
-fi
