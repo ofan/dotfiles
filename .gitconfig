@@ -9,9 +9,11 @@
     safecrlf = true
     eol = lf
 [alias]
-    st=status --untracked-files=no -s
-    sts=status -s
+    st=status --untracked-files=no -s -b
+    sts=status -s -b
+    stu=status -s -b -u
     df=diff
+    dfs=diff --stat
     cm=commit
     cmm= "!f() { msg=$1;shift;git commit \"$@\" -m $msg; }; f"
     cmma=commit -a -m
