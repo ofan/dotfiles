@@ -34,18 +34,27 @@ if [ $SHELL_LOGIN -eq 1 -a -x /usr/libexec/path_helper ]; then
 	eval `/usr/libexec/path_helper -s`
 fi
 
-if [[ -n "$OS_MAC" ]];
-then
-    PATH="/opt/local/bin:$PATH"
-fi
+_add_path() {
+    [[ -z "$1" ]] && return
+    [[ ":$PATH:" == *:$1:* ]] && return
+    [[ -d "$1" ]] || echo "Error: path $1 doesn't exist"
+    if [[ -z "$2" || "$2" == "prepend" ]];then 
+        PATH="$1:$PATH"
+    else
+        PATH="$PATH:$1"
+    fi
+}
+
+alias prepend_path=_add_path
+alias append_path=_add_path append
+alias add_path=append_path
+
+[[ -n "$OS_MAC" ]] && prepend_path "/opt/local/bin"
 
 if [[ -n "$OS_LINUX" ]]; then
     export NO_DOC_UPDATE=1
-    PATH="~/.cabal/bin:$PATH"
-    export PATH
 fi
 
-if [[ ( -n "$OS_MAC" || -n "$OS_LINUX" || -n "$OS_CYGWIN" ) && ( -z "`echo $PATH | grep $HOME/bin`" ) ]];then
-    PATH="$HOME/bin:$PATH"
-    export PATH
+if [[ -n "$OS_MAC" || -n "$OS_LINUX" || -n "$OS_CYGWIN"  ]];then
+    prepend_path "$HOME/bin"
 fi

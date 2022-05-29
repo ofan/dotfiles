@@ -1,16 +1,2 @@
 #!/bin/bash
-export PATH=~/.local/bin:~/go/bin:$PATH:/usr/local/go/bin
-
-_BREW_BIN=/home/linuxbrew/.linuxbrew/bin
-if [[ -d "$_BREW_BIN" &&  ":$PATH:" != *":$_BREW_BIN:"* ]];then
-    export PATH=$PATH:$_BREW_BIN
-fi
-unset _BREW_BIN
-
-if [[ -d "${KREW_ROOT:-$HOME}/.krew/bin" ]]; then
-    export PATH="$PATH:${KREW_ROOT:-$HOME/.krew}/bin"
-fi
-
-if [ -e $HOME/.linkerd2/bin ];then
-    export PATH=$PATH:$HOME/.linkerd2/bin
-fi
+prepend_path $HOME/.local/bin

@@ -71,7 +71,5 @@ complete -o filenames -F _root_command n
 
 complete -C /home/ubuntu/bin/mc mc
 #######
-if type direnv &> /dev/null;then
-    eval "$(direnv hook bash)"
-fi
 
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"

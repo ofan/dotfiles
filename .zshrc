@@ -105,9 +105,4 @@ _start_tmux
 autoload -Uz compinit; compinit
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /home/ubuntu/bin/mc mc
-
-######
-if type direnv &> /dev/null;then
-    eval "$(direnv hook zsh)"
-fi
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
