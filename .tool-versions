@@ -1,3 +1,5 @@
+use asdf
 python 3.10.4
 golang 1.18.2
 ansible-base 2.10.17
+direnv 2.31.0
