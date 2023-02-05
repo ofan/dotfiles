@@ -44,3 +44,5 @@
     textconv="_GIT_FILENAME='%f' ~/bin/_git_crypt_filter diff"
 [push]
     default = simple
+[credential "https://github.com"]
+	helper = !gh auth git-credential
