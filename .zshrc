@@ -105,4 +105,5 @@ _start_tmux
 autoload -Uz compinit; compinit
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /home/ubuntu/bin/mc mc
+echo Loading asdf-direnv plugin at $0:A:$LINENO
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
