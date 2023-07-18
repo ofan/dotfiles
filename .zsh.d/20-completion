@@ -1,0 +1,16 @@
+_shell=$(basename $SHELL)
+if type rtx &> /dev/null; then
+    eval "$(rtx completion $_shell)"
+fi
+
+if type kubectl &> /dev/null; then
+    source <(kubectl completion $_shell)
+fi
+
+if type helm &> /dev/null; then
+    source <(helm completion $_shell)
+fi
+
+if type yq &> /dev/null; then
+    source <(yq shell-completion $_shell)
+fi
