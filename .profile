@@ -1,9 +1,9 @@
 # disable IXON (Ctrl-S lock)
 stty -ixon
 
-echo Loading asdf at $0:A:$LINENO
-if type brew &> /dev/null; then
-    source $(brew --prefix asdf)/libexec/asdf.sh
+if type rtx &> /dev/null; then
+    echo Loading rtx at $0:A:$LINENO
+    eval "$(rtx activate `basename $SHELL`)"
 fi
 
 function load_profile_dir(){

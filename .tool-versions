@@ -1,6 +1,5 @@
-python 3.10.4
 golang 1.18.2
-ansible-base 2.10.17
-direnv 2.32.2
 kubectl 1.24.10
 yq 4.30.8
+krew 0.4.3
+vault 1.13.2+ent
