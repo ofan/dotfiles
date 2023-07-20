@@ -68,7 +68,4 @@ fi
 complete -o filenames -F _root_command notify
 complete -o filenames -F _root_command n
 
-
-#######
-
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+eval "$(~/.local/share/rtx/bin/rtx activate bash)"
