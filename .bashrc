@@ -20,6 +20,15 @@ HISTFILESIZE=50000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# include profiles
+function load_profile(){
+    # Load profiles
+    if [ -f $HOME/.profile ]; then
+        source $HOME/.profile
+    fi
+}
+load_profile
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -67,5 +76,3 @@ fi
 #################################################################################################
 complete -o filenames -F _root_command notify
 complete -o filenames -F _root_command n
-
-eval "$(~/.local/share/rtx/bin/rtx activate bash)"

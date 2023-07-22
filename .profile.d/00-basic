@@ -45,9 +45,9 @@ _add_path() {
     fi
 }
 
-alias prepend_path=_add_path
-alias append_path=_add_path append
-alias add_path=append_path
+alias prepend_path='_add_path'
+alias append_path='_add_path append'
+alias add_path='append_path'
 
 [[ -n "$OS_MAC" ]] && prepend_path "/opt/local/bin"
 
