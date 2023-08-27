@@ -7,59 +7,58 @@ if [ -n "$OS_UNIX" ];then
 else
     alias ls="ls -F --color=always"
 fi
-alias ':q'=exit							#vimlike :)
-alias 'x'=exit		
-alias 'q'=exit		
-alias lsa='ls -ahF'
-alias lsl='ls -lhF'
-alias lsal='lsa -l'
-alias lsla='lsal'
-alias lla='lsa -l'
-alias llh='ls -lh'
-#alias a='sudo apt-get'	#fast access apt-get
-#alias s='apt-cache search'    #fast cache search
-alias xc='nyxmms2'
-alias lsls="lsl -S"
-alias n="notify"
-alias idf=gnomevfs-info
-alias '..'='cd ..'
-alias '....'='cd ../..'
-alias '~'='cd ~'
-alias sshproxy='ssh -CfNg ofan@shell.cjb.net 127.0.0.1:1080'
-alias cls=clear
-alias 'gbk2utf8'='iconv -fgbk -tutf8'
-alias g2u=gbk2utf8
-alias du='du -h'
-alias df='df -h'
-alias echoe='echo -e'
-alias y=yaourt
-alias n=notify
-alias hex='od -Ax -tx1z -v'
-alias 'gentag'='ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .'
-alias b='sudo bauerbill'
-alias ba='b --aur'
-alias bau='ba -Syu'
-alias bas='ba -Ss'
-alias bai='ba -S'
-alias baq='ba -Qsi'
-alias bal='ba -Ql'
-alias bao='ba -Qo'
-alias bar='ba -R'
-alias rot13="tr a-zA-Z n-za-mN-ZA-M"
-alias c='clyde'
-alias mutt="COLORFGBG='15;color233' mutt"
-alias slrn="slrn -n"
-alias man='LC_ALL=C LANG=C man'
-alias f=finger
-alias ll='ls -alh'
-#alias ls='ls --color=auto '
-alias offlineimap-tty='offlineimap -u TTY.TTYUI'
-alias rest2html-css='rst2html --embed-stylesheet --stylesheet-path=/usr/share/python-docutils/s5_html/themes/default/print.css'
-alias g=git
-alias less='less -R'
-alias irc='weechat'
 if [ -n "$OS_MAC" ];then
 	alias vim="mac_clipboard_reattach `which vim`"
 fi
+
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls -F'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias '..'='cd ..'
+alias '....'='cd ../..'
 alias ':e'=vim
+alias ':q'=exit
+alias 'gbk2utf8'='iconv -fgbk -tutf8'
+alias 'gentag'='ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .'
+alias 'q'=exit
+alias 'x'=exit
+alias '~'='cd ~'
+alias c='clyde'
+alias cls=clear
+alias df='df -h'
+alias du='du -h'
+alias echoe='echo -e'
+alias f=finger
+alias g2u=gbk2utf8
+alias g=git
+alias hex='od -Ax -tx1z -v'
+alias irc='weechat'
+alias k='kubectl'
 alias kb='kustomize build --enable-helm --load-restrictor=LoadRestrictionsNone'
+alias ktl='kubectl'
+alias less='less -R'
+alias ll='ls -alh'
+alias lla='lsa -l'
+alias llh='ls -lh'
+alias lsa='ls -ahF'
+alias lsal='lsa -l'
+alias lsl='ls -lhF'
+alias lsla='lsal'
+alias lsls="lsl -S"
+alias man='LC_ALL=C LANG=C man'
+alias mutt="COLORFGBG='15;color233' mutt"
+alias rot13="tr a-zA-Z n-za-mN-ZA-M"
+alias slrn="slrn -n"
+alias y=yaourt

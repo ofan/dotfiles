@@ -1,0 +1,25 @@
+#!/bin/sh
+# Path: .profile.d/02-brew-rtx
+
+# install brew if not installed yet (https://brew.sh/) 
+
+_brew_path="/home/linuxbrew/.linuxbrew/bin/brew"
+
+if [ ! -f "$_brew_path" ]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# install rtx if not installed yet
+if ! type rtx &> /dev/null; then
+    brew install rtx
+fi
+
+if type rtx &> /dev/null; then
+    echo Loading rtx at $0:A:$LINENO
+    if [ -n "$BASH_VERSION" ]; then
+        SHELL=bash
+    elif [ -n "$ZSH_VERSION" ]; then
+        SHELL=zsh
+    fi
+    eval "$(rtx activate $SHELL)"
+fi

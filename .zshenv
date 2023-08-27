@@ -10,7 +10,7 @@ function load_profile(){
 
 function load_zsh_rc(){
     # Init dir
-    for i in `ls $ZSH_RC_DIR | sort -n`;do
+    for i in `\ls $ZSH_RC_DIR | sort -n`;do
         source $ZSH_RC_DIR/$i
     done
 }

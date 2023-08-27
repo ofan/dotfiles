@@ -20,15 +20,6 @@ HISTFILESIZE=50000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# include profiles
-function load_profile(){
-    # Load profiles
-    if [ -f $HOME/.profile ]; then
-        source $HOME/.profile
-    fi
-}
-load_profile
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -49,30 +40,16 @@ unset color_prompt force_color_prompt
 
 # enable color support of ls and also add handy aliases
 export CLICOLOR=1
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -F'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 #################################################################################################
 complete -o filenames -F _root_command notify
 complete -o filenames -F _root_command n
+
+# include profiles
+function load_profile(){
+    # Load profiles
+    if [ -f $HOME/.profile ]; then
+        source $HOME/.profile
+    fi
+}
+load_profile
