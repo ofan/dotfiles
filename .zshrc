@@ -2,7 +2,6 @@
 
 autoload -Uz compinit; compinit
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /home/ubuntu/bin/mc mc
 
 load_profile
 load_zsh_rc

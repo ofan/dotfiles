@@ -3,10 +3,12 @@
 
 # install brew if not installed yet (https://brew.sh/) 
 
-_brew_path="/home/linuxbrew/.linuxbrew/bin/brew"
+test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-if [ ! -f "$_brew_path" ]; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! type brew &> /dev/null; then
+    echo Installing brew at $0:A:$LINENO
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 fi
 
 # install rtx if not installed yet
