@@ -1,6 +1,7 @@
+#!/bin/zsh
 _shell=$(basename $SHELL)
-if type rtx &> /dev/null; then
-    eval "$(rtx completion $_shell)"
+if type mise &> /dev/null; then
+    eval "$(mise completion $_shell)"
 fi
 
 if type kubectl &> /dev/null; then

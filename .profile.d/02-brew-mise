@@ -1,5 +1,5 @@
 #!/bin/sh
-# Path: .profile.d/02-brew-rtx
+# Path: .profile.d/02-brew-mise
 
 # install brew if not installed yet (https://brew.sh/) 
 
@@ -11,17 +11,17 @@ if ! type brew &> /dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-# install rtx if not installed yet
-if ! type rtx &> /dev/null; then
-    brew install rtx
+# install mise if not installed yet
+if ! type mise &> /dev/null; then
+    brew install mise
 fi
 
-if type rtx &> /dev/null; then
-    echo Loading rtx at $0:A:$LINENO
+if type mise &> /dev/null; then
+    echo Loading mise at $0:A:$LINENO
     if [ -n "$BASH_VERSION" ]; then
         SHELL=bash
     elif [ -n "$ZSH_VERSION" ]; then
         SHELL=zsh
     fi
-    eval "$(rtx activate $SHELL)"
+    eval "$(mise activate $SHELL)"
 fi
