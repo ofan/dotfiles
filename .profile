@@ -2,8 +2,8 @@
 stty -ixon
 
 function load_profile_dir(){
-    # Include .profile.d
     for i in `ls ~/.profile.d/ | sort -n`;do
+        [[ ! -z "$_DEBUG" ]] && echo Include ~/.profile.d/$i
         source ~/.profile.d/$i
     done
 }
