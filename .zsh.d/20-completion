@@ -15,3 +15,7 @@ fi
 if type yq &> /dev/null; then
     source <(yq shell-completion $_shell)
 fi
+
+if type velero &> /dev/null; then
+    source <(velero completion $_shell)
+fi
