@@ -1,5 +1,6 @@
-go      latest
+golang  latest
 kubectl 1.24.10
 yq      4.30.8
 krew    0.4.3
 vault   1.13.2+ent
+velero  latest
