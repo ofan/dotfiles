@@ -20,6 +20,7 @@ SHELL_LOGIN=0
 SHELL_INTERACTIVE=0
 
 SHELL_FLAG=${0:0:1}
+SHELL_CACHE_DIR=${SHELL_CACHE_DIR:-${XDG_CACHE_HOME:-$HOME/.cache}/shell-cache}
 # Determing if login shell
 if [ "x$SHELL_FLAG" = "x-" ];then
     export SHELL_LOGIN=1
@@ -37,17 +38,86 @@ fi
 _add_path() {
     [[ -z "$1" ]] && return
     [[ ":$PATH:" == *:$1:* ]] && return
-    [[ -d "$1" ]] || echo "Error: path $1 doesn't exist"
-    if [[ -z "$2" || "$2" == "prepend" ]];then 
-        PATH="$1:$PATH"
+    if [[ -z "$2" ]]; then
+        local cmd='prepend'
+        local path=$1
     else
-        PATH="$PATH:$1"
+        local cmd=$1
+        local path=$2
     fi
+    if [[ "$cmd" == "prepend" ]];then
+        [[ -d "$path" ]] || echo "Error: path $1 doesn't exist"
+        [[ ! -z "$_DEBUG" ]] && echo "Prepend path: $path"
+        PATH="$path:$PATH"
+    else
+        [[ ! -z "$_DEBUG" ]] && echo "Append path: $path"
+        PATH="$PATH:$path"
+    fi
+}
+
+_cached_eval() {
+    local cache=$SHELL_CACHE_DIR/eval-$1.$SHELL;shift
+    if [[ ! -f $cache ]]; then
+        local output=$("$@")
+        [[ ! -z "$_DEBUG" ]] && echo "Cache $@"
+        eval $output
+        printf '%s' $output >| $cache &!
+    else
+        source $cache
+        {
+            local output=$("$@")
+            [[ $output == "$(<$cache)" ]] && return
+            printf '%s' >| $cache
+            print "$0: cache updated '$@' (applied next time)"
+        } &!
+    fi
+}
+
+_cached_completion() {
+    local cache=$SHELL_CACHE_DIR/_$1.$SHELL;shift
+    if [[ ! -f $cache ]]; then
+        "$@" >| $cache
+    else
+        break
+        #"$@" >| $cache &!
+    fi
+}
+
+cached() {
+    case $SHELL in
+        zsh)
+            emulate -LR zsh -o extended_glob -o err_return
+            [[ -d $SHELL_CACHE_DIR ]] || mkdir -p $SHELL_CACHE_DIR
+            local subcmd=$1; shift
+            local id=${$(base64 <<< "$@")%%=#}
+            _cached_$subcmd $id $@
+            ;;
+        bash)
+            _cached_eval $id $@
+            ;;
+    esac
+}
+
+_add_completion() {
+    local cmd=$1
+    local comp_cmd=$@
+    case $SHELL in
+        zsh)
+            (( $+commands[$cmd] )) || return
+            ;;
+        bash)
+            type $cmd &> /dev/null || return
+            ;;
+    esac
+    cached completion $comp_cmd
 }
 
 alias prepend_path='_add_path'
 alias append_path='_add_path append'
 alias add_path='append_path'
+alias add_completion='_add_completion'
+
+[[ "$SHELL" = "zsh" ]] && fpath=($SHELL_CACHE_DIR $fpath)
 
 [[ -n "$OS_MAC" ]] && prepend_path "/opt/local/bin"
 

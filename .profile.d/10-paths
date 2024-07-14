@@ -1,3 +1,6 @@
 #!/bin/bash
 prepend_path $HOME/.local/bin
 prepend_path /home/linuxbrew/.linuxbrew/bin
+if type krew &> /dev/null; then
+    append_path $HOME/.krew/bin
+fi
