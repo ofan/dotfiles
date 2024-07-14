@@ -68,7 +68,7 @@ _cached_eval() {
             local output=$("$@")
             [[ $output == "$(<$cache)" ]] && return
             printf '%s' >| $cache
-            print "$0: cache updated '$@' (applied next time)"
+            echo "$0: cache updated '$@' (applied next time)"
         } &!
     fi
 }
@@ -90,12 +90,13 @@ cached() {
             [[ -d $SHELL_CACHE_DIR ]] || mkdir -p $SHELL_CACHE_DIR
             local subcmd=$1; shift
             local id=${$(base64 <<< "$@")%%=#}
-            _cached_$subcmd $id $@
             ;;
         bash)
-            _cached_eval $id $@
+            local subcmd=eval
+            local id=${$(base64 <<< "$@")%%=#}
             ;;
     esac
+    _cached_$subcmd $id $@
 }
 
 _add_completion() {

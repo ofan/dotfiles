@@ -1,17 +1,19 @@
 #!/bin/sh
 local _shell=$(basename $SHELL)
 
-local _cmd_list=($(mise current | cut -d' ' -f1))
+local _cmd_list=(
+    kustomize
+    velero
+    helm
+    argocd
+    kubectl
+    talosctl
+    yq
+    krew
+)
 
-local _cmd_skip_list=(vault)
-
-for local _cmd in $_cmd_list; do
-    if [[ -z "$(echo $_cmd_skip_list | grep -wq $_cmd)" ]]; then
-        [[ -n "$_DEBUG" ]] && echo "Enable auto-completion for cmd $_cmd"
-        cached completion $_cmd completion $_shell &!
-    else
-        [[ -n "$_DEBUG" ]] && echo "Skip completion for cmd $_cmd"
-        continue
-    fi
+for _cmd in $_cmd_list; do
+    [[ -n "$_DEBUG" ]] && echo "Enable auto-completion for cmd $_cmd"
+    cached completion $_cmd completion $_shell &!
 done
 
