@@ -2,6 +2,7 @@
 local _shell=$(basename $SHELL)
 
 local _cmd_list=(
+    mise
     kustomize
     velero
     helm
